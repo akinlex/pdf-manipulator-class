@@ -46,7 +46,23 @@ class ManipulatePDF:
             with open('watermarked.pdf', 'wb') as file:
                 output.write(file)
 
-obj = ManipulatePDF(r'paste file path here')
-# obj.rotate()
+    def encrypt(self, password):
+        writer = PyPDF2.PdfFileWriter()
+        reader = PyPDF2.PdfFileReader(open(self.file_name, 'br'))
+        
+        for i in range(reader.getNumPages()):
+            writer.addPage(reader.getPage(i))
+            
+        writer.encrypt(user_pwd=str(password), owner_pwd=None, 
+                        use_128bit=True)
+
+        # new_file_name = ''.join(self.file_name.split())[:-4]
+        # print(new_file_name)
+
+        with open('encrypted.pdf', 'wb') as file:
+            writer.write(file)
+
+obj = ManipulatePDF(r'past file path here')
+obj.encrypt(password=12345)
 # obj.merge()
 # obj.watermark()
