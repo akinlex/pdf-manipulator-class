@@ -62,7 +62,7 @@ class ManipulatePDF:
         with open('encrypted.pdf', 'wb') as file:
             writer.write(file)
 
-obj = ManipulatePDF(r'past file path here')
+obj = ManipulatePDF(r'paste file path here')
 obj.encrypt(password=12345)
 # obj.merge()
 # obj.watermark()
